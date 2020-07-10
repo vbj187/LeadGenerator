@@ -44,9 +44,22 @@ def get_list(htm):
         if tag.text != 'View From The Top Profile':
             nameAndUrl.append([tag.text, tag.get('href')])
     # print(nameAndUrl)
+    # print(len(nameAndUrl))
+    # print(nameAndUrl)
     return nameAndUrl
+
+
+def forEachCompany(lis):
+    for one, two in lis:
+        print(two)
+
+
+def json_to_csv_file(jsonFile, csvFile):
+    # https://www.geeksforgeeks.org/convert-json-to-csv-in-python/
+    return jsonFile
 
 
 one = get_webpage(URL)
 two = get_webpage_text(one)
 three = get_list(one)
+four = forEachCompany(three)
