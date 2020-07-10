@@ -32,7 +32,15 @@ def get_list(url):
     for tr in table_rows:
         td = tr.find_all('td')
         row = [i.text for i in td]
-        return row
+        print(row)
+
+        """
+        for every tr with the td containing company name
+        get the href attribute for to the company's website 
+        """
+
+    # with open(table) as raw_results:
+    #     results = BeautifulSoup(raw_results,)
 
 
 page = get_webpage(URL)
