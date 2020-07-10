@@ -8,4 +8,8 @@ response = requests.get(URL)
 
 soup = BeautifulSoup(response.text, 'html.parser')
 
-print(soup)
+# print(soup)
+
+table = soup.find('table', {'class': 'table100'})
+
+print(table)
