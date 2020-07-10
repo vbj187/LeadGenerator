@@ -1,14 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 URL = 'http://www.econtentmag.com/Articles/Editorial/Feature/The-Top-100-Companies-in-the-Digital-Content-Industry-The-2016-2017-EContent-100-114156.html'
 
 
 def get_webpage(url):
-    response = requests.get(url)
-    page = response.text
-    return page
+    try:
+        response = requests.get(url)
+        page = response.text
+        return page
+    except:
+        return None
 
 
 def get_webpage_text(htm):
@@ -35,14 +37,24 @@ def get_list(htm):
     return nameAndUrl
 
 
-def forEachCompany(lis):
+def for_each_company(lis):
     for companyName, companyMainPage in lis:
-        get_contact_page_link(companyMainPage)
+        # print(companyMainPage)
+        companyPageAsInput = get_webpage(companyMainPage)
+        get_contact_page_link(companyPageAsInput)
 
 
-def get_contact_page_link(companyMainPage):
-    company_main_page = get_webpage(companyMainPage)
-    return company_main_page
+def get_contact_page_link(companyPage):
+    try:
+        soap = BeautifulSoup(companyPage, 'html.parser')
+        contact_link = soap.find(text='Contact')
+        return
+    except:
+        soap = BeautifulSoup(companyPage, 'html.parser')
+        contact_link = soap.find(text='About Us')
+        return
+    else:
+        return None
 
 
 def get_location():
@@ -57,4 +69,4 @@ def json_to_csv_file(jsonFile, csvFile):
 one = get_webpage(URL)
 two = get_webpage_text(one)
 three = get_list(one)
-four = forEachCompany(three)
+four = for_each_company(three)
