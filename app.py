@@ -4,20 +4,6 @@ import pandas as pd
 
 URL = 'http://www.econtentmag.com/Articles/Editorial/Feature/The-Top-100-Companies-in-the-Digital-Content-Industry-The-2016-2017-EContent-100-114156.html'
 
-# response = requests.get(URL)
-
-# soup = BeautifulSoup(response.text, 'html.parser')
-
-# # print(soup)
-
-# table = soup.find('table', {'class': 'table100'}).tbody
-
-# print(table)
-
-# rows = table.find_all('tr')
-
-# columns = [v.text for v in rows[0].find_all('td')]
-
 
 def get_webpage(url):
     response = requests.get(url)
@@ -50,13 +36,22 @@ def get_list(htm):
 
 
 def forEachCompany(lis):
-    for one, two in lis:
-        print(two)
+    for companyName, companyMainPage in lis:
+        get_contact_page_link(companyMainPage)
+
+
+def get_contact_page_link(companyMainPage):
+    company_main_page = get_webpage(companyMainPage)
+    return company_main_page
+
+
+def get_location():
+    return
 
 
 def json_to_csv_file(jsonFile, csvFile):
     # https://www.geeksforgeeks.org/convert-json-to-csv-in-python/
-    return jsonFile
+    return
 
 
 one = get_webpage(URL)
