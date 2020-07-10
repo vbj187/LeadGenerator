@@ -21,27 +21,32 @@ URL = 'http://www.econtentmag.com/Articles/Editorial/Feature/The-Top-100-Compani
 
 def get_webpage(url):
     response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    return soup
+    page = response.text
+    return page
 
 
-def get_list(url):
-    table = url.find('table', {'class': 'table100'}).tbody
-    table_rows = table.find_all('tr')
-
-    for tr in table_rows:
-        td = tr.find_all('td')
-        row = [i.text for i in td]
-        print(row)
-
-        """
-        for every tr with the td containing company name
-        get the href attribute for to the company's website 
-        """
-
-    # with open(table) as raw_results:
-    #     results = BeautifulSoup(raw_results,)
+def get_webpage_text(htm):
+    soup = BeautifulSoup(htm, 'html.parser')
+    return soup.text
 
 
-page = get_webpage(URL)
-get_list(page)
+def get_list(htm):
+    """
+    for every tr with the td containing company name
+    get the href attribute for to the company's website 
+    """
+    # https://stackoverflow.com/questions/43193969/how-to-get-an-attribute-value-using-beautifulsoup-and-python/43194401
+
+    soup = BeautifulSoup(htm, 'lxml')
+    item = soup.findAll('a', {'class': '100link'})
+    nameAndUrl = []
+    for tag in item:
+        if tag.text != 'View From The Top Profile':
+            nameAndUrl.append([tag.text, tag.get('href')])
+    # print(nameAndUrl)
+    return nameAndUrl
+
+
+one = get_webpage(URL)
+two = get_webpage_text(one)
+three = get_list(one)
