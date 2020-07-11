@@ -41,7 +41,7 @@ def for_each_company(lis):
     # print(len(lis))
     # count = 0
     for companyName, companyMainPageUrl in lis:
-        return get_contact_page_link(companyMainPageUrl)
+        return get_contact_page_link(companyName, companyMainPageUrl)
         # companyPageAsInput = get_contact_page_link(companyMainPageUrl)
         # get_contact_page_link(companyPageAsInput)
         # print(companyPageAsInput)
@@ -49,9 +49,9 @@ def for_each_company(lis):
         # print(count)
 
 
-def get_contact_page_link(companyPageUrl):
-    # print(f"{companyPageUrl}/about-us")
-    url = f"{companyPageUrl}/about-us"
+def get_contact_page_link(name, url):
+    # print(f"{url}/about-us")
+    url = f"{url}/about-us"
     response = requests.get(url)
     page = response.text
     # print(page)
@@ -61,7 +61,7 @@ def get_contact_page_link(companyPageUrl):
 def get_location(htm):
     # for firstLead--class--`node--type-location`
     soup = BeautifulSoup(htm, 'lxml')
-    locationNode = soup.find('article', {'class': 'node--type-location'})
+    locationNode = soup.findAll('article', {'class': 'node--type-location'})
     print(locationNode)
 
 
