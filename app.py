@@ -38,24 +38,23 @@ def get_list(htm):
 
 
 def for_each_company(lis):
-    for companyName, companyMainPage in lis:
-        # print(companyMainPage)
-        companyPageAsInput = get_webpage(companyMainPage)
+    # print(len(lis))
+    # count = 0
+    for companyName, companyMainPageUrl in lis:
+        get_contact_page_link(companyMainPageUrl)
+        # companyPageAsInput = get_contact_page_link(companyMainPageUrl)
         # get_contact_page_link(companyPageAsInput)
-        print(companyPageAsInput)
+        # print(companyPageAsInput)
+        # count += 1
+        # print(count)
 
 
-def get_contact_page_link(companyPage):
-    try:
-        soap = BeautifulSoup(companyPage, 'html.parser')
-        contact_link = soap.find(text='Contact')
-        return
-    except:
-        soap = BeautifulSoup(companyPage, 'html.parser')
-        contact_link = soap.find(text='About Us')
-        return
-    else:
-        return None
+def get_contact_page_link(companyPageUrl):
+    # print(f"{companyPageUrl}/about-us")
+    url = f"{companyPageUrl}/about-us"
+    response = requests.get(url)
+    page = response.text
+    print(page)
 
 
 def get_location():
@@ -70,4 +69,4 @@ def json_to_csv_file(jsonFile, csvFile):
 one = get_webpage(URL)
 two = get_webpage_text(one)
 three = get_list(one)
-# four = for_each_company(three)
+four = for_each_company(three)
