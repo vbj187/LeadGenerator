@@ -41,7 +41,7 @@ def for_each_company(lis):
     # print(len(lis))
     # count = 0
     for companyName, companyMainPageUrl in lis:
-        get_contact_page_link(companyMainPageUrl)
+        return get_contact_page_link(companyMainPageUrl)
         # companyPageAsInput = get_contact_page_link(companyMainPageUrl)
         # get_contact_page_link(companyPageAsInput)
         # print(companyPageAsInput)
@@ -54,11 +54,15 @@ def get_contact_page_link(companyPageUrl):
     url = f"{companyPageUrl}/about-us"
     response = requests.get(url)
     page = response.text
-    print(page)
+    # print(page)
+    return get_location(page)
 
 
-def get_location():
-    return
+def get_location(htm):
+    # for firstLead--class--`node--type-location`
+    soup = BeautifulSoup(htm, 'lxml')
+    locationNode = soup.find('article', {'class': 'node--type-location'})
+    print(locationNode)
 
 
 def json_to_csv_file(jsonFile, csvFile):
