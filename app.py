@@ -28,7 +28,7 @@ def get_list(htm):
     for tag in item:
         if tag.text != 'View From The Top Profile':
             nameAndUrl.append([tag.text, tag.get('href')])
-    # print(nameAndUrl)
+    print(nameAndUrl)
     # print(len(nameAndUrl))
     # print(nameAndUrl)
     firstLead = slice(1)
