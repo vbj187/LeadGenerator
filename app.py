@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 URL = 'http://www.econtentmag.com/Articles/Editorial/Feature/The-Top-100-Companies-in-the-Digital-Content-Industry-The-2016-2017-EContent-100-114156.html'
 
 
@@ -50,6 +51,13 @@ def for_each_company(lis):
 
 
 def get_contact_page_link(name, url):
+    '''
+    write with a try/except/else block
+    try-f"{url}/about-us"
+    except-f"{url}/contacts"
+    else-pass
+    '''
+
     # print(f"{url}/about-us")
     url = f"{url}/about-us"
     response = requests.get(url)
@@ -63,12 +71,19 @@ def get_location(htm):
     soup = BeautifulSoup(htm, 'lxml')
     locationNodes = soup.findAll(
         'p', {'class': 'address'})
+    print(locationNodes)
     print(len(locationNodes))
-    # locations = []
-    # for tag in locationNodes:
-    #     locations.append([tag])
-    # print(len(locations))
-    # print(locations)
+    locations = []
+    for locationNode in locationNodes:
+        locations.append([locationNode])
+    # for location in locations:
+    #     #
+    #     # errortype-location is a list, not a string
+    #     #
+    #     locSoup = BeautifulSoup(location, 'lxml')
+    #     locationDetail = locSoup.find('span')
+    #     print(locationDetail)
+    return
 
 
 def json_to_csv_file(jsonFile, csvFile):
