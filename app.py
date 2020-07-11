@@ -19,10 +19,6 @@ def get_webpage_text(htm):
 
 
 def get_list(htm):
-    """
-    for every tr with the td containing company name
-    get the href attribute for to the company's website 
-    """
     # https://stackoverflow.com/questions/43193969/how-to-get-an-attribute-value-using-beautifulsoup-and-python/43194401
 
     soup = BeautifulSoup(htm, 'lxml')
@@ -34,14 +30,19 @@ def get_list(htm):
     # print(nameAndUrl)
     # print(len(nameAndUrl))
     # print(nameAndUrl)
-    return nameAndUrl
+    firstLead = slice(1)
+
+    # print(nameAndUrl[firstLead])
+    # returns [['Acquia, Inc', 'http://acquia.com']]
+    return nameAndUrl[firstLead]
 
 
 def for_each_company(lis):
     for companyName, companyMainPage in lis:
         # print(companyMainPage)
         companyPageAsInput = get_webpage(companyMainPage)
-        get_contact_page_link(companyPageAsInput)
+        # get_contact_page_link(companyPageAsInput)
+        print(companyPageAsInput)
 
 
 def get_contact_page_link(companyPage):
@@ -69,4 +70,4 @@ def json_to_csv_file(jsonFile, csvFile):
 one = get_webpage(URL)
 two = get_webpage_text(one)
 three = get_list(one)
-four = for_each_company(three)
+# four = for_each_company(three)
