@@ -61,8 +61,14 @@ def get_contact_page_link(name, url):
 def get_location(htm):
     # for firstLead--class--`node--type-location`
     soup = BeautifulSoup(htm, 'lxml')
-    locationNode = soup.findAll('article', {'class': 'node--type-location'})
-    print(locationNode)
+    locationNodes = soup.findAll(
+        'p', {'class': 'address'})
+    print(len(locationNodes))
+    # locations = []
+    # for tag in locationNodes:
+    #     locations.append([tag])
+    # print(len(locations))
+    # print(locations)
 
 
 def json_to_csv_file(jsonFile, csvFile):
