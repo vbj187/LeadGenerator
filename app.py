@@ -91,7 +91,8 @@ def json_to_csv_file(jsonFile, csvFile):
     return
 
 
-one = get_webpage(URL)
-two = get_webpage_text(one)
-three = get_list(one)
-four = for_each_company(three)
+if __name__ == '__main__':
+    one = get_webpage(URL)
+    two = get_webpage_text(one)
+    three = get_list(one)
+    four = for_each_company(three)
