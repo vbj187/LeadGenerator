@@ -69,10 +69,12 @@ def get_contact_page_link(name, url):
 def get_location(htm):
     # for firstLead--class--`node--type-location`
     soup = BeautifulSoup(htm, 'lxml')
-    locationNodes = soup.findAll(
+    locationNodes = soup.find(
         'p', {'class': 'address'})
-    print(locationNodes)
-    print(len(locationNodes))
+    firstLocation = locationNodes.text
+    print(firstLocation)
+    # print(locationNodes)
+    # print(len(locationNodes))
     locations = []
     for locationNode in locationNodes:
         locations.append([locationNode])
